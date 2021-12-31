@@ -1,0 +1,30 @@
+{
+  "name": "social-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kfengbest/social-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kfengbest/social-service/issues"
+  },
+  "homepage": "https://github.com/kfengbest/social-service#readme",
+  "dependencies": {
+    "@types/jest": "^27.4.0",
+    "body-parser": "^1.19.1",
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "jest": "^27.4.5",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.4"
+  }
+}
