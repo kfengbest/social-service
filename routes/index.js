@@ -12,5 +12,7 @@ router.post('/users/:followerUserId/follow/:userId', userCtrl.followUserCtrl);
 router.get('/users/:userId/followers', userCtrl.getFollowersCtrl);
 router.post('/posts', userCtrl.createPost);
 router.get('/posts', userCtrl.getPosts);
+router.post('/posts/:postId/likes', userCtrl.likePost);
+router.get('/posts/:postId/likes', userCtrl.getPostLikers);
 
 module.exports = router;

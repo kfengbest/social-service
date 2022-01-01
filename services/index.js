@@ -96,11 +96,38 @@ const getPosts = async (userId) => {
     return posts;
 }
 
+const likePost = async(userId, postId) => {
+    const user = await db.User.findOne({
+        userId : userId
+    });
+
+    const post = await db.Post.findOne({
+        postId : postId
+    });
+
+    const userLikedPostAsso = await post.addLikers(user);
+
+    return userLikedPostAsso;
+}
+
+const getPostLikers = async (postId) => {
+
+    const post = await db.Post.findOne({
+        postId : postId
+    });
+
+    const likers = await post.getLikers();
+
+    return likers;
+}
+
 module.exports = {
     createUser ,
     getUsers,
     followUser,
     getFollowers,
     createPost,
-    getPosts
+    getPosts,
+    likePost,
+    getPostLikers
 }

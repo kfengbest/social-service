@@ -1,5 +1,5 @@
 const e = require("express");
-const {createUser, getUsers, followUser, getFollowers, createPost, getPosts} = require('../services/index.js');
+const {createUser, getUsers, followUser, getFollowers, createPost, getPosts, likePost, getPostLikers} = require('../services/index.js');
 
 class UserController {
     constructor() {}
@@ -72,6 +72,33 @@ class UserController {
         try {
             const userId = Number(req.headers['userid']);
             let result = await getPosts(userId);
+
+            return res.json(result);
+
+        } catch (err) {
+            return res.status(500).json({error : e.message});
+        } 
+    }
+
+    async likePost(req, res) {
+        try {
+            const userId = Number(req.headers['userid']);
+            const postId = Number(req.params.postId);
+
+            let result = await likePost(userId, postId);
+
+            return res.json(result);
+
+        } catch (err) {
+            return res.status(500).json({error : e.message});
+        } 
+    }
+
+    async getPostLikers(req, res) {
+        try {
+            const postId = req.params.postId;
+
+            let result = await getPostLikers(postId);
 
             return res.json(result);
 
