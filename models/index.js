@@ -2,7 +2,8 @@ const { Sequelize, Op, Model, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("sqlite::memory:");
 
 let db = {
-    User : require('./users.js')(sequelize, Sequelize)
+    User : require('./users.js')(sequelize, Sequelize),
+    Post : require('./posts.js')(sequelize, Sequelize)
 }
 
 Object.keys(db).forEach( modelName => {

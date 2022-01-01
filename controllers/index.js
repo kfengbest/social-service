@@ -1,5 +1,5 @@
 const e = require("express");
-const {createUser, getUsers, followUser, getFollowers} = require('../services/index.js');
+const {createUser, getUsers, followUser, getFollowers, createPost, getPosts} = require('../services/index.js');
 
 class UserController {
     constructor() {}
@@ -52,6 +52,32 @@ class UserController {
         } catch (err) {
             return res.status(500).json({error : e.message});
         }
+    }
+
+    async createPost(req, res) {
+        try {
+            const post = req.body;
+            const userId = Number(req.headers['userid']);
+
+            let result = await createPost(userId, post.content);
+
+            return res.json(result);
+
+        } catch (err) {
+            return res.status(500).json({error : e.message});
+        }
+    }
+
+    async getPosts(req, res) {
+        try {
+            const userId = Number(req.headers['userid']);
+            let result = await getPosts(userId);
+
+            return res.json(result);
+
+        } catch (err) {
+            return res.status(500).json({error : e.message});
+        } 
     }
 }
 

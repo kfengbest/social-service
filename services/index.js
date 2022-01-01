@@ -75,9 +75,32 @@ const getFollowers = async (userId) => {
     
 }
 
+const createPost = async (userId, content) => {
+
+    const post = await db.Post.create({
+        userId : userId,
+        content : content,
+        type : 'text'
+    });
+
+    return post;
+}
+
+const getPosts = async (userId) => {
+    const posts = await db.Post.findAll({
+        where : {
+            userId : userId
+        }
+    });
+
+    return posts;
+}
+
 module.exports = {
     createUser ,
     getUsers,
     followUser,
-    getFollowers
+    getFollowers,
+    createPost,
+    getPosts
 }

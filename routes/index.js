@@ -10,5 +10,7 @@ router.get('/users', userCtrl.getUsersCtrl);
 router.get('/users/:userId', userCtrl.getUsersCtrl);
 router.post('/users/:followerUserId/follow/:userId', userCtrl.followUserCtrl);
 router.get('/users/:userId/followers', userCtrl.getFollowersCtrl);
+router.post('/posts', userCtrl.createPost);
+router.get('/posts', userCtrl.getPosts);
 
 module.exports = router;
