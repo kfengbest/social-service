@@ -15,10 +15,69 @@ const getUsers = async (userId) => {
             }
         })
     }
+}
+
+const followUser = async (userId, followerUserId) => {
+
+    if(!userId) {
+        return 'Invalid userId';
+    }
+
+    if(!followerUserId) {
+        return "Invalid followerUserId";
+    }
+
+    if(userId === followerUserId) {
+        return "Invalid: User cannot follow themselves!";
+    }
+
+    const user = await db.User.findOne({
+        where : {
+            userId
+        }
+    });
+
+    if (!user) {
+        return `User '${userId}' does not exist!`;
+    }
+
+    const followerUser = await db.User.findOne({
+        where : {
+            userId : followerUserId
+        }
+    });
+
+    if (!followerUser) {
+        return `folowerUser '${followerUserId}' does not exist!`;
+    }
+
+    const association = await user.addFollower(followerUser);
+
+    if (!association) {
+        throw new Error(`Rollback initiated: User '${userId}' has already followed user '${followerUserId}'!`);
+    }
+
+    return `User '${followerUser.userName}' has successfully followed user '${user.userName}'!`;
+
+}
+
+const getFollowers = async (userId) => {
+
+    const user = await db.User.findOne({
+        where : {
+            userId
+        }
+    });
+
+    const followerUsers = await user.getFollowers();
+
+    return followerUsers;
     
 }
 
 module.exports = {
     createUser ,
-    getUsers
+    getUsers,
+    followUser,
+    getFollowers
 }

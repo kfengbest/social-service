@@ -25,8 +25,16 @@ module.exports = (sequelize, Sequelize) => {
             through : 'UsersFollowers',
             foreignKey : 'userId',
             otherKey : 'followerUserId'
-        })
+        });
+
+        User.belongsToMany(User, {
+            as: 'FollowingUsers',
+            through: 'UsersFollowers',
+            foreignKey: 'followerUserId',
+            otherKey: 'userId'
+          });
     }
+
 
     return User;
 }
